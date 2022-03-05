@@ -1,0 +1,4 @@
+D:\УНИК\ЧИСЛЕННЫЕ МЕТОДЫ\Лабы\Лаба 4\TEST_LAB4\Debug\TEST_LAB4.exe
+D:\УНИК\ЧИСЛЕННЫЕ МЕТОДЫ\Лабы\Лаба 4\TEST_LAB4\Debug\TEST_LAB4.pdb
+D:\University\Numerical methods\Labs\3 semestr\Лаба 4\TEST_LAB4\Debug\TEST_LAB4.exe
+D:\University\Numerical methods\Labs\3 semestr\Лаба 4\TEST_LAB4\Debug\TEST_LAB4.pdb

@@ -1,0 +1,8 @@
+﻿  lab4.c
+D:\University\Numerical methods\Labs\3 semestr\Лаба 4\LAB_NM_4\lab4.c(42,11): warning C4101: eigenValuesKnown: неиспользованная локальная переменная
+D:\University\Numerical methods\Labs\3 semestr\Лаба 4\LAB_NM_4\lab4.c(44,9): warning C4101: eigenValues2: неиспользованная локальная переменная
+D:\University\Numerical methods\Labs\3 semestr\Лаба 4\LAB_NM_4\lab4.c(45,11): warning C4101: afterMethod: неиспользованная локальная переменная
+D:\University\Numerical methods\Labs\3 semestr\Лаба 4\LAB_NM_4\lab4.c(339,1): warning C4029: объявленный список формальных параметров отличается от объявления
+D:\University\Numerical methods\Labs\3 semestr\Лаба 4\LAB_NM_4\lab4.c(494,11): warning C4101: y_cur: неиспользованная локальная переменная
+D:\University\Numerical methods\Labs\3 semestr\Лаба 4\LAB_NM_4\lab4.c(493,11): warning C4101: y_prev: неиспользованная локальная переменная
+  LAB_NM_4.vcxproj -> D:\University\Numerical methods\Labs\3 semestr\Лаба 4\LAB_NM_4\Debug\LAB_NM_4.exe

@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#pragma warning(disable : 4996)
+#define SIZE 7
+#define PI  3.14
+typedef struct {
+	double* gridX;
+	double* gridY;
+	int n;
+}grid_t;
+
+grid_t FillGrid()
+{
+	grid_t grid;
+	grid.gridX = (double*)malloc(sizeof(double) * SIZE);
+	grid.gridY = (double*)malloc(sizeof(double) * SIZE);
+	if (!grid.gridY || !grid.gridX) {
+		printf("Error allocating memory to grid\n");
+		exit(1);
+	}
+	return grid;
+}
+double f(double x)
+{
+	return log10(x) + 7.0 / (2 * x + 6);
+}
+double Lagrangepolynomial(double x, double* x_k, double* y_k)
+{
+	double basics_pol = 1;
+	double result = 0;
+	for (int i = 0; i < SIZE; i++)
+	{
+		basics_pol = 1;
+		for (int j = 0; j < SIZE; j++)
+		{
+			if (j != i)
+			{
+				basics_pol *= (x - x_k[j]) / (x_k[i] - x_k[j]);
+				//printf("%lf ", basics_pol);
+			}			
+		}
+		result += y_k[i] * basics_pol;
+	}
+	return result;
+}
+
+int main()
+{
+	FILE* f_error = fopen("error.txt", "wt");
+	FILE* f_coefficients = fopen("coefficients.txt", "wt");
+	FILE* f_x = fopen("x.txt","wt");
+	FILE* f_y = fopen("y.txt", "wt");
+	double a = 0;
+	double b = 1;
+	double x_k[SIZE];
+	double y_k[SIZE];
+	double t[SIZE];
+	double lagrangepol[SIZE];
+	double error[SIZE];
+	double x_all[SIZE * 10];
+	for (int i = 0; i < SIZE; i++)
+	{
+		t[i] = cos(PI * (2.0 * i + 1.0) / (2.0 * SIZE + 1.0));
+		x_k[i] = (b + a) / 2.0 + (b - a) * t[i] / 2.0;
+		
+		y_k[i] = f(x_k[i]);
+		fprintf(f_x, "%.16lf ", x_k[i]);
+		fprintf(f_y, "%.16lf ", y_k[i]);
+	}
+	for (int i = 0; i < SIZE * 10; i++)
+	{
+		x_all[i] = x_k[i / 10] + x_k[(i + 1) / 10] - x_k[(i / 10)];
+	}
+	for (int i = 0; i < SIZE; i++)
+	{
+		lagrangepol[i] = Lagrangepolynomial(x_k[i], x_k, y_k);
+		error[i] = fabs(y_k[i] - lagrangepol[i]);
+		fprintf(f_coefficients, "%.16lf ", lagrangepol[i]);
+		fprintf(f_error, "%.16lf ", error[i]);
+	}
+	fclose(f_coefficients);
+	fclose(f_error);
+	fclose(f_x);
+	fclose(f_y);
+	return 0;
+}
