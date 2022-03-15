@@ -1,0 +1,11 @@
+epsilon = load('f_epsilon.txt');
+error = load('f_error.txt');
+integral = load('f_integral.txt');
+figure;
+grid on;
+title('Dependence of the actual error on the specified accuracy(epsilon)');
+loglog(error, epsilon);
+hold on;
+loglog(epsilon,epsilon);
+xlabel('\epsilon');
+legend('Actual error','Bisector');
