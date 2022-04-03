@@ -1,9 +1,9 @@
 epsilon = load('epsilon.txt');
 %epsilon2 = load('epsilon_lambda.txt');
 iterations = load('iterations.txt');
-eigenVectorsNorm = load('eigenVectorsNorm.txt');
+%eigenVectorsNorm = load('eigenVectorsNorm.txt');
 eigenValuesNorm = load('eigenValuesNorm.txt');
-nevyazka = load('nevyazka.txt');
+%nevyazka = load('nevyazka.txt');
 set(0,'DefaultAxesFontSize',15,'DefaultAxesFontName','Times New Roman');
 figure;
 
