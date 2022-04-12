@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.8.2)  2 APR 2022 18:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.8.2)  5 APR 2022 00:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -333,124 +333,283 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (c:/texlive/2021/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
+(c:/texlive/2021/texmf-dist/tex/latex/tools/layout.sty
+Package: layout 2021-03-10 v1.2e Show layout parameters
+\oneinch=\count270
+\cnt@paperwidth=\count271
+\cnt@paperheight=\count272
+\cnt@hoffset=\count273
+\cnt@voffset=\count274
+\cnt@textheight=\count275
+\cnt@textwidth=\count276
+\cnt@topmargin=\count277
+\cnt@oddsidemargin=\count278
+\cnt@evensidemargin=\count279
+\cnt@headheight=\count280
+\cnt@headsep=\count281
+\cnt@marginparsep=\count282
+\cnt@marginparwidth=\count283
+\cnt@marginparpush=\count284
+\cnt@footskip=\count285
+\fheight=\count286
+\ref@top=\count287
+\ref@hoffset=\count288
+\ref@voffset=\count289
+\ref@head=\count290
+\ref@body=\count291
+\ref@foot=\count292
+\ref@margin=\count293
+\ref@marginwidth=\count294
+\ref@marginpar=\count295
+\Interval=\count296
+\ExtraYPos=\count297
+\PositionX=\count298
+\PositionY=\count299
+\ArrowLength=\count300
+)
+(c:/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(c:/texlive/2021/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks23
+)
+(c:/texlive/2021/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(c:/texlive/2021/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+))
+\Gm@cnth=\count301
+\Gm@cntv=\count302
+\c@Gm@tempcnt=\count303
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
+\Gm@dimlist=\toks24
+)
 (c:/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-07-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count270
+\l__color_backend_stack_int=\count304
 \l__pdf_internal_box=\box52
 )
 (./РћС‚С‡С‘С‚ 1.aux)
 \openout1 = `"РћС‚С‡С‘С‚ 1.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Info: Redefining \th on input line 14.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Info: Redefining \th on input line 23.
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(85.35826pt, 469.47049pt, 42.67912pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=469.47049pt
+* \textheight=702.78308pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--54
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+Underfull \hbox (badness 10000) in paragraph at lines 47--54
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+Underfull \hbox (badness 10000) in paragraph at lines 47--54
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+Underfull \hbox (badness 10000) in paragraph at lines 47--54
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+Underfull \hbox (badness 10000) in paragraph at lines 47--54
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+Underfull \hbox (badness 10000) in paragraph at lines 47--54
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+Underfull \hbox (badness 10000) in paragraph at lines 47--54
 
  []
 
 LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 
-45.
+54.
 (c:/texlive/2021/texmf-dist/tex/latex/cyrillic/t2acmtt.fd
 File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 50--52
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 50--52
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--78
 
  []
 
 [1
 
 {c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 63.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 90.
 
 
 (c:/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 63.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 90.
 
 
 (c:/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (0.22083pt too wide) in paragraph at lines 69--70
-[]\T2A/cmr/m/n/12 Для по-стро-е-ния по-ли-но-ма необ-хо-ди-мо ис-поль-зо-вать ч
-е-бы-шев-
+Overfull \hbox (3.18172pt too wide) in paragraph at lines 103--104
+[]\T2A/cmr/m/n/12 2. По-стро-ить гра-фи-ки функ-ции и 3х по-ли-но-мов для раз-л
+ич-но-го чис-ла уз-лов (n=3..10),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--108
+Underfull \hbox (badness 10000) in paragraph at lines 142--144
 
  []
 
 [2]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 139.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 175.
 
-[3]
-Overfull \hbox (6.59738pt too wide) in paragraph at lines 146--147
-\T2A/cmr/m/n/12 уголь-ная.(Генерируются мат-ри-ца, по-лу-чен-ную мат-ри-цу пред
--став-
- []
-
-[4] [5] (./РћС‚С‡С‘С‚ 1.aux) ) 
+[3] [4] (./РћС‚С‡С‘С‚ 1.aux) ) 
 Here is how much of TeX's memory you used:
- 2887 strings out of 478542
- 40865 string characters out of 5854403
- 352585 words of memory out of 5000000
- 20820 multiletter control sequences out of 15000+600000
+ 3524 strings out of 478542
+ 49999 string characters out of 5854403
+ 378682 words of memory out of 5000000
+ 21440 multiletter control sequences out of 15000+600000
  413244 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,6n,66p,701b,161s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,7n,66p,705b,201s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-su
 per/cm-super-t2a.enc}<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.p
@@ -460,17 +619,16 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2021/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
-10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb><c:
-/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/texlive/2
-021/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2021/texmf-
-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2021/texmf-dist/fonts
-/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2021/texmf-dist/fonts/type1/pub
-lic/cm-super/sftt1200.pfb>
-Output written on "РћС‚С‡С‘С‚ 1.pdf" (5 pages, 221026 bytes).
+/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb
+><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/texli
+ve/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2021/te
+xmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2021/texmf-dist/f
+onts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2021/texmf-dist/fonts/type1
+/public/cm-super/sftt1200.pfb>
+Output written on "РћС‚С‡С‘С‚ 1.pdf" (4 pages, 219456 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
+ 93 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

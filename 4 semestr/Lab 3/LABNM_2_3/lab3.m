@@ -2,6 +2,9 @@ epsilon = load('f_epsilon.txt');
 error = load('f_error.txt');
 integral = load('f_integral.txt');
 iterations = load('f_iterations.txt');
+h = load('f_h.txt');
+len1 =length(error);
+len2 = length(iterations);
 figure;
 loglog(epsilon,error);
 hold on;
@@ -11,10 +14,17 @@ loglog(epsilon,epsilon);
 ylabel('Actual error');
 xlabel('\epsilon');
 legend('Actual error','Bisector');
+
 figure;
 semilogx(epsilon,iterations);
+hold on;
 ylabel('Iterations');
 xlabel('\epsilon');
-hold on;
 grid on;
 title('Dependence of the iterations on the specified accuracy(epsilon)');
+
+figure;
+loglog(h, error);
+hold on;
+loglog(h, 2.8*h.^4);
+legend('Actual error','length');

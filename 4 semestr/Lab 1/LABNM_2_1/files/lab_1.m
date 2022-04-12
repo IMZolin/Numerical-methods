@@ -1,0 +1,88 @@
+f = @(x) log10(x) +7./(2*x+6);
+%x_h30 = load('f_x_h30.txt');
+%y_h30 = load('f_y_h30.txt');
+%fprintf('%e',max(abs(f(x_h30)-y_h30)));
+x = load('f_x.txt');
+y = load('f_y.txt');
+x_h1 = load('f_x_h1.txt');
+y_h1 = load('f_y_h1.txt');
+
+x_h2 = load('f_x_h2.txt');
+y_h2 = load('f_y_h2.txt');
+x_h3 = load('f_x_h3.txt');
+y_h3 = load('f_y_h3.txt');
+polynom1 = load('f_polynom1.txt');
+polynom2 = load('f_polynom2.txt');
+polynom3 = load('f_polynom3.txt');
+%polynom30 = load('f_polynom30.txt');
+actual_error1 = load('f_actual_error1.txt');
+actual_error2 = load('f_actual_error2.txt');
+actual_error3 = load('f_actual_error3.txt');
+%actual_error30 = load('f_actual_error30.txt');
+theoritic_error = load('f_th_error1.txt');
+%theoritic_error30 = load('f_th_error30.txt');
+%theoritic_error2 = load('files/f_theoritic_error2.txt');
+%theoritic_error3 = load('files/f_theoritic_error3.txt');
+max_error = load('f_max_error30.txt');
+nodes = load('f_nodes30.txt');
+
+len1 = length(max_error);
+len2 = length(nodes);
+len3 = length(polynom1);
+len4 = length(actual_error1);
+
+figure;
+grid on;
+plot(x,y,'r');
+hold on;
+plot(x,polynom1,'b');
+plot(x_h1,y_h1, 'm*');
+xlim([0.1 1.5]);
+ylim([- 1 1]);
+title('3 nodes');
+xlabel('X');
+ylabel('Polynom');
+
+figure;
+grid on;
+plot(x,y,'r');
+hold on;
+plot(x,polynom2,'b');
+plot(x_h2,y_h2, 'm*');
+xlim([0.1 1.5]);
+ylim([-1 1]);
+title('5 nodes');
+xlabel('X');
+ylabel('Polynom');
+
+figure;
+grid on;
+plot(x,y,'r');
+hold on;
+plot(x,polynom3,'b');
+plot(x_h3,y_h3, 'm*');
+xlim([0.1 1.5]);
+ylim([-1 1]);
+title('7 nodes');
+xlabel('X');
+ylabel('Polynom');
+
+figure;
+semilogy(x,actual_error1,'r');
+hold on;
+semilogy(x,actual_error2,'b');
+semilogy(x,actual_error3, 'g');
+semilogy(x,theoritic_error,'m');
+xlim([0.1 1.5]);
+legend('3 nodes', '5 nodes', '7 nodes', 'th_error');
+title('Actual error of the 3,5,7 nodes');
+xlabel('X');
+ylabel('Actual error');
+
+figure;
+semilogy(nodes, max_error);
+hold on;
+grid on;
+title('Dependence of the max error on the number of nodes');
+xlabel('Nodes');
+ylabel('Max error');
