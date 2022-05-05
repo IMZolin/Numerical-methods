@@ -1,0 +1,367 @@
+\documentclass{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{alltt}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{layout}
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	top=25mm, 
+	right=15mm, 
+	bottom=25mm, 
+	left=30mm
+}
+
+\title{non-linear equations}
+\author{Иван Золин}
+\date{April 2022}
+\thispagestyle{empty}
+\begin{document}
+	
+	\large
+	\begin{center}
+		
+		Санкт-Петербургский политехнический университет\\
+		Высшая школа прикладной математики и вычислительной физики, ФизМех
+		
+		~\\
+		~\\
+		~\\
+		~\\
+		Направление подготовки\\
+		«01.03.02 Прикладная математика и информатика»
+		
+		~\\
+		~\\
+		~\\
+		~\\
+		Отчет по лабораторной работе № 7\\
+		\textbf{тема "Решение краевой задачи для ОДУ 2-ого порядка" }	
+		~\\	Дисциплина "Численные методы"
+	\end{center}
+	
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	\begin{alltt}
+		\begin{center}
+			Выполнил студент гр. 5030102/00001			  		   		  Золин И.М.
+			Преподаватель: 				              	        	Добрецова С.Б.
+		\end{center}
+		
+	\end{alltt}
+	
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	~\\
+	\begin{center}
+		Санкт-Петербург
+		
+		~\\
+		\textbf{2022}
+		
+	\end{center}{}
+	
+	\newpage
+	
+	\section{Формулировка задачи и её формализация}
+	\subsection{Формулировка задания}
+	\begin{enumerate}
+		\item Найти численное решение краевой задачи на равномерной
+		сетке методом конечных разностей 2 порядка. 
+		\item  Построить графики точного, полученных решений и ошибки на отрезке.
+		\item Построить график зависимости бесконечной нормы фактической точности от величины шага.
+		\item Построить график заивисимости нормы ошибки от величины возмущения начального условия при фиксированном
+		шаге.
+		
+	\end{enumerate}	
+	
+	\subsection{Формализация задания}
+	Дано дифференциальное уравнение 2-го порядка $F(x,y,y',y'')=0$,
+	
+	$y''+ p(x)y'+q(x)y = f(x), x \in [a, b]$, где y - неизвестная функция.
+	
+	Поставлена краевая задача:
+	
+	$a_0y(a)+a_1y'(a) = S, a_1 = 0 \Rightarrow y(a) = \frac{S}{a_0} = A$
+	
+	$b_0y(b)+b_1y'(b) = T, b_1 = 0 \Rightarrow y(b) = \frac{T}{b_0} = B$
+	
+	Необходимо найти приближенное решение этой задачи
+	
+	\section{Алгоритм метода и условия его применимости}   
+	
+	\subsection{Алгоритм}
+	Входные данные: $a, b, h, p_i=p(x_i), q_i=q(x_i), f_i=f(x_i)$ - коэф-ты ОДУ 2 порядка, $i = \overline{1, n-1}$;  	
+	$(h = \frac{b-a}{n-1}, y_i = y(x_i))$
+	
+	\begin{enumerate}
+		%\item Составим равномерную сетку $x_i = a + ih$, где $i = \overline{1,n-1}$
+		\item Представим y' и y'' в дискретном виде.
+		$\\y'_i = \frac{y_{i+1} -  y_{i-1}}{2h}\\
+		y''_i = \frac{y_{i+1} -2y_{i} + y_{i-1}}{h^2}\\
+		\frac{y_{i+1} -2y_{i} + y_{i-1}}{h^2} + p_i\frac{y_{i+1} -  y_{i-1}}{2h} + q_iy_i = f_i\\
+		y_{i+1} -2y_{i} + y_{i-1} + \frac{p_ih}{2}(y_{i+1} -  y_{i-1})+q_ih^2y_i = f_ih^2\\
+		(1-\frac{hp_i}{2})y_{i-1} + (q_ih^2-2)y_i + (1+\frac{hp_i}{2})y_{i+1} = f_ih^2\\
+		$
+		
+		Обозначим:
+		
+		\begin{equation*}
+			\begin{cases}
+				a_i = 1-\frac{hp_i}{2},
+				\\
+				c_i = q_ih^2-2,
+				\\
+				b_i = 1+\frac{hp_i}{2}.
+			\end{cases}
+		\end{equation*}
+		$i = \overline{1, n - 1}$
+		
+		$a_iy_{i-1} + c_iy_i + b_iy_{i+1} = f_ih^2$	(*)
+		
+		МКР приводит к трёхдиаганольной матрице. Нулвые и n-ые ур-я получим из краевых условий.
+		$y_0=y(a)=A, y_n=y(b)=B$
+
+		\item 	$$ 
+		\left(
+		\begin{array}{cccccc}
+			1 & 0 & 0 & \ldots & 0 & 0\\
+			a_1 & c_1 & b_1 & \ldots & 0 & 0\\
+			0 & a_2 & c_2 & \ldots & 0 & 0 \\
+			\vdots & \vdots& \vdots & \ddots & \vdots\\
+			0 & 0 & 0 & \ldots & c_{n-1} & b_{n-1} \\
+			0 & 0 & 0 & \ldots & 0 &1
+		\end{array}
+		\right) 
+		\left(\begin{array}{c} 
+			y_0\\ 
+			y_1\\ 
+			y_2\\
+			\vdots\\
+			y_{n-1}\\
+			y_n 
+		\end{array}\right)
+		=
+		\left(\begin{array}{c} 
+			y(a)\\ 
+			h^2f_1\\ 
+			h^2f_2\\
+			\vdots\\
+			h^2f_{n-1}\\
+			y(b) 
+		\end{array}\right)
+		(**)$$
+		
+		Переобозначим:
+		$z_i - diag$, $r_i$ - столбец свободных членов, $i=\overline{0,n}$ - столбец свободных членов, $s_i$ - поддиагональные эл-ты,$i=\overline{1,n}$ $t_i$ - наддиагональные эл-ты,$i=\overline{0,n-1}$
+		
+		\item Для получившейся СЛАУ применим метод прогонки
+		
+		Уравнение под номером i содержит только 3 неизвестных $y_{i-1}, y_i, y_{i+1}$:
+		
+		$s_iy_{i-1}+z_iy_i+t_iy_{i+1} = r_i, i = \overline{1,n}$
+		
+		\begin{enumerate}
+			\item Прямой ход:
+			
+			$i = 0, s_0 = 0, \delta_0 = -\frac{t_0}{z_0}, \lambda_0 = \frac{r_0}{z_0}$
+			
+			$i = \overline{1, n-1}, \delta_i = -\frac{t_i}{s_i\delta_{i-1}+z_i}, \lambda_i = \frac{r_i-s_i\lambda_{i-1}}{s_i\delta_{i-1}+ z_i}$
+			
+			$i = n, t_0 = 0, \delta_n = 0, \lambda_n = \frac{r_n-s_n\lambda_{n-1}}{s_n\delta_{n-1}+ z_n}$
+			
+			\item Обратный ход:
+			
+			$i = n , y_n = \lambda_n$
+			
+			$i = \overline{1,n-1}, y_i = \delta_iy_{i+1} + \lambda_i$
+		\end{enumerate}
+
+	\end{enumerate}
+	
+	Результат: столбец $y_{i}, i = \overline{0,n}$ - искомое решение ОДУ
+	
+	\subsection{Условия применимости метода}
+	Критерий существования и единственности решения СЛАУ (**) в ычислительной погрешностью $O(h^2)$
+	
+	$\forall x \in [a, b]$
+	\begin{equation*}
+		\begin{cases}
+			p(x) \geq 0, 
+			\\
+			p(x) \geq \frac{h}{2}|q(x)|,
+			\\
+			r(x) \leq 0.
+		\end{cases}
+	\end{equation*}
+	
+	\section{Предварительный анализ задачи}
+	$y'' -tg(x)y' +3y = \sin(x), x \in [0 , \frac{\pi}{2}]$
+	
+	$p(x) =-tg(x), q(x) = 3, f(x) = \sin(x)$
+	
+	Точное решение: $y = \sin(x)$,$y(0) = 0, y(\frac{\pi}{2}) = 1$
+	
+	Создаётся равномерная сетка на отрезке $[0 , \frac{\pi}{2}]$.
+	
+	\section{Тестовый пример с детальными расчётами для задачи малой размерности}
+	$y'' -tg(x)y' +3y = \sin(x)$. Точное решение $y_{exact} = \sin(x)$
+	
+	$x \in[a, b] = [0 , \frac{\pi}{2}] : \{0 ; \frac{\pi}{8}; \frac{\pi}{4}; \frac{3\pi}{8}; \frac{\pi}{2}\}$ - сетка. $h = \frac{\pi}{8}$
+	
+	$y(a) = 0, y(b) = 1$
+	
+	$\frac{\pi}{8}: h^2\cdot f(x) = \frac{\pi^2}{64} \sin(\frac{\pi}{8}) = \frac{\sqrt{2-\sqrt{2}}\pi^2}{128} \approx 0.0590$
+	
+	$\frac{\pi}{4}: h^2\cdot f(x) = \frac{\pi^2}{64} \sin(\frac{\pi}{4}) = \frac{\sqrt{2}\pi^2}{128} \approx 0.1090$
+	
+	$\frac{3\pi}{8}: h^2\cdot f(x) = \frac{\pi^2}{64} \sin(\frac{3\pi}{8}) = \frac{\sqrt{2+\sqrt{2}}\pi^2}{128} \approx 0.1425$
+	
+	$1- \frac{h}{2}p_1 = 1 + \frac{\pi}{16}tg(\frac{\pi}{8}) = \frac{16 + \pi\sqrt{3-2\sqrt{2}}}{16} \approx 1.0813$
+	
+	$1- \frac{h}{2}p_2 = 1 + \frac{\pi}{16}tg(\frac{\pi}{4}) = 1 + \frac{\pi}{16} \approx 1.1963$
+	
+	$1- \frac{h}{2}p_3 = 1 + \frac{\pi}{16}tg(\frac{3\pi}{8}) = \frac{16 + \pi\sqrt{3+2\sqrt{2}}}{16} \approx 1.4740$
+	
+	$1+ \frac{h}{2}p_1 = 1 - \frac{\pi}{16}tg(\frac{\pi}{8}) = \frac{16 - \pi\sqrt{3-2\sqrt{2}}}{16} \approx 0.9187$
+	
+	$1+ \frac{h}{2}p_2 = 1 - \frac{\pi}{16}tg(\frac{\pi}{4}) = 1 - \frac{\pi}{16} \approx 0.8037$
+	
+	$1+ \frac{h}{2}p_3 = 1 - \frac{\pi}{16}tg(\frac{3\pi}{8}) = \frac{16 - \pi\sqrt{3+2\sqrt{2}}}{16} \approx 0.5260$
+	
+	$h^2q_1 - 2 = h^2q_2 - 2 = h^2q_3 - 2 = 3\frac{\pi^2}{64} - 2 \approx -1.5374$
+	
+	$$ 
+	\left(\begin{array}{ccccc} 
+		1 & 0 & 0 & 0 & 0 \\ 
+		1.0813 & -1.5374 & 0.9187 & 0 & 0 \\ 
+		0 & 1.1963 & -1.5374 & 0.8037 & 0 \\ 
+		0 & 0 & 1.4740 & -1.5374 & 0.5260\\
+		0 & 0 & 0 & 0 & 1
+	\end{array}\right) 
+	\left(\begin{array}{c} 
+		y_0\\ 
+		y_1\\ 
+		y_2\\
+		y_3\\
+		y_4 
+	\end{array}\right)
+	=
+	 \left(\begin{array}{c} 
+	 	0\\ 
+	 	0.0590\\ 
+	 	0.1090\\
+	 	0.1425\\
+	 	1 
+	 \end{array}\right)
+	$$
+	
+	\begin{equation*}
+		\begin{cases}
+			y_0 = 0, 
+			\\
+			1.0813y_0 - 1.5374y_1  + 0.9187y_2 = 0.0590,
+			\\
+			1.1963y_1 - 1.5374y_2  + 0.8037y_3 = 0.1090,
+			\\
+			1.4740y_2 -1.5374y_3  + 0.5260y_4 = 0.1425,
+			\\
+			y_4 = 1.
+		\end{cases}
+	\end{equation*}
+
+	Прямой ход:
+	
+	$i = 0, \delta_0 = -\frac{t_0}{z_0} = 0.0000, \lambda_0 = \frac{r_0}{z_0} = 0.0000,$
+	
+	$i = 1, \delta_1 = -\frac{t_1}{s_1\delta_{0}+z_1} = 0.5976, \lambda_1 = \frac{r_1}{z_1} = -0.0384,$
+	
+	$i = 2, \delta_2 = -\frac{t_2}{s_2\delta_{1}+z_2} = 0.9771, \lambda_2 = \frac{r_2-s_2\lambda_{1}}{s_2\delta_{1}+ z_2} = -0.1884,$
+	
+	$i = 3, \delta_3 = -\frac{t_3}{s_3\delta_{2}+z_3} = 5.4190, \lambda_3 = \frac{r_3-s_3\lambda_{3}}{s_3\delta_{3}+ z_3} =-4.3294,$
+	
+	$i = 4, \delta_3 = 0, \lambda_4 = \frac{r_4-s_4\lambda_{4}}{s_4\delta_{4}+ z_4} = 1.0000$
+	
+	Обратный ход:
+	
+	$i = 4 , y_4 = \lambda_4 = 1.0000$
+	
+	$i = 3 , y_3 = \delta_3y_{4} + \lambda_3 = 1.0897$
+	
+	$i = 2 , y_2 = \delta_2y_{3} + \lambda_2 = 0.8763$
+	
+	$i = 1 , y_1 = \delta_1y_{2} + \lambda_1 = 0.4853$
+	
+	$i = 0 , y_0 = \delta_0y_{1} + \lambda_0 = 0.0000$
+
+	\begin{equation*}
+		\begin{cases}
+			y_0 = 0, 
+			\\
+			y_1 = 0.4853,
+			\\
+			y_2 = 0.8763,
+			\\
+			y_3 = 1.0897,
+			\\
+			y_4 = 1.
+		\end{cases}
+	\end{equation*}
+	Ошибки вычислений: $error(x) = y_{exact} - y(x)$
+	\begin{center}
+	\begin{tabular}{ |c|c|c|c|c|c|} 
+		\hline
+		x & 0 & $\frac{\pi}{8}$ & $\frac{\pi}{4}$ & $\frac{3\pi}{8}$ & $\frac{\pi}{2}$   \\ 
+		$R_n(x)$ & 0 & 0.1026 & 0.1692 & 0.1657 & 0  \\ 
+		\hline
+	\end{tabular}
+\end{center}
+	\section{Подготовка контрольных тестов}
+	\paragraph{}Для анализа зависимостей решается уравнение
+	$y'' - y'tg(x) + 3y = \sin{x}$ при $x \in [0, \frac{\pi}{2}]$ методом конечных разностей 2 порядка. При количестве точек $[10, 100, 1000, 10000, 20000, 100000]$, а также вносится возмущение в начальное
+	условие от $10^{-1}$ до $10^{-9}$.
+	
+	\section{Модульная структура программы}
+	MKR(вх: h, m, x, y;вых: res) Находит res краевой задачи
+	на отрезке [a, b] с начальными условиями А и В, в n точках.
+	
+	SolveMatrix(вх:$n, b[\;], c[\;], a[\;], f[\;]$, вых: $x_i$, $i = \overline{0,n}$) решает трёхдиагональную матрицу методом прогонки, где $b[\;], c[\;], a[\;]$ -  массивы коэффициентов лежащие над, на, под диагональю соответственно, $f[\;]$ - столбец свободных членов, $x_i , i = \overline{0,n}$ - решение СЛАУ.
+
+	\section{Анализ результатов}
+	\begin{enumerate}
+		\item График ошибки на отрезке показывает, что ошибка нарастает при приближении к середине отрезка. 
+		\item  График ошибки на отрезке показывает, что при уменьшении шага в 2 раза, ошибка также уменьшается в 2 раза, что
+		согласуется с теорией.
+		\item График зависимости максимальной ошибки от длины шага показывает, что ошибка уменьшается при уменьшении
+		шага.
+		\item График завивисимости нормы ошибки от возмущения начального условия показывает, что ошибка убывает до $10^{-6}$
+		при уменьшении возмущения
+
+	\end{enumerate}
+	
+	\section{Выводы}
+		Метод конечных разностей прост в реализации и обладает хорошей скоростью сходимости.
+	
+\end{document}

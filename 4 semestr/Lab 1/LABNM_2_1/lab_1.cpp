@@ -43,7 +43,7 @@ int main()
 	PrintVectorToFile(filename_x, x);
 	PrintVectorToFile(filename_y, y);
 	ofstream file;
-	for (int i = 2; i < MAX_NODES; i += 2)
+	for (int i = 2; i < MAX_NODES; i += 3)
 	{
 		vector<double>teoretic_error;
 		vector<double>actual_error;
@@ -53,7 +53,7 @@ int main()
 		vector<double> polynom_max;
 		vector<double> x_h_max;
 		vector<double> y_h_max;
-		vector<double> check;
+		vector<double> polynom_nodes;
 
 		vector<double> x_h = ChebyshevGrid(i, a, b);
 		vector<double> y_h = GridFunc(x_h, i);
@@ -77,6 +77,13 @@ int main()
 		int k = i + 1;
 		nodes.push_back(k);
 
+		for (int j = 0; j < i+1; j++)
+		{
+			pol = LagrangePolynom(x_h[j], x_h, y_h, i);//уменьшил количество узлов на 1
+			//actual_error.push_back((y[j] - pol));
+			polynom_nodes.push_back(pol);
+		}
+
 		string filename_x_h;
 		string filename_y_h;
 		string filename_polynom;
@@ -86,6 +93,8 @@ int main()
 		string filename_max_error;
 		string filename_x;
 		string filename_y;
+		string filename_p;
+		string filename_p_2;
 		if (i == 2 || i == 4 || i == 6 || i >=20)
 		{
 			if (i == 2)
@@ -137,10 +146,14 @@ int main()
 			PrintVectorToFile(filename_max_error, max_error);
 			PrintVectorToFile(filename_nodes, nodes);
 		}
+		filename_p = "files/f_m_pol_nodes.txt";
+		filename_p_2 = "files/f_pol_nodes.txt";
 		filename_x = "files/f_m_nodes.txt";
-		filename_y = "files/f_m_pol_nodes.txt";
+		filename_y = "files/f_m_y_nodes.txt";
 		PrintVectorToFile(filename_x, x_midpoints);
-		PrintVectorToFile(filename_y, polynom_max);
+		PrintVectorToFile(filename_y, y_midpoints);
+		PrintVectorToFile(filename_p, polynom_max);
+		PrintVectorToFile(filename_p_2, polynom_nodes);
 		//filename_nodes = "files/f_nodes3.txt";
 		//filename_max_error = "files/f_max_error.txt";
 		//PrintVectorToFile(filename_max_error, max_error);
@@ -151,7 +164,7 @@ int main()
 }
 
 double f(double x) {
-	//return log10(x) + 7.0 / (2 * x + 6);
+	//return log10(x) + 7.0 / (2 * x + 6); 
 	return pow((2.0 * x + log(x)),0.5);
 }
 

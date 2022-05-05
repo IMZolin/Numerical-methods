@@ -57,7 +57,7 @@ int main() {
     vector<double> error;
     vector<double> h;
     string filename;
-    for (double eps = 0.1; eps >= 10e-8; eps *= 0.1) {
+    for (double eps = 0.1; eps >= 10e-15; eps *= 0.1) {
         int m = 1; //начальное внутренние число точек
         I_prev = 0;
         I = 0;

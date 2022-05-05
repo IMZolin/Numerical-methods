@@ -1,56 +1,85 @@
-#include <iostream>
+﻿#include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
-#include <cmath>
-#include <vector>
-#include <iomanip>
-#include <fstream>
-using namespace std;
+#pragma warning(disable : 4996)
 # define M_PI 3.14159265358979323846
 #define A M_PI / 2
 #define B 2 * M_PI
-#define F(A) M_PI / 2
 #define N 30
-#define P 3
+#define F(A) M_PI / 2
+//#define F(A) 1.0
+#define P 2
+#define E 0.000000001
+
+double fDiff(double x);
 double f(double x, double y);
-double Answer(double x);
-vector<double> createSteadyGrid(double a, double b, int n);
 double Runge_Kutta_method(int m, double h, double x, double y);
-void PrintVector(vector<double> vec);
-void PrintVectorToFile(string filename, vector<double> vec);
-double Euler(int m, double h, double x, double y);
-void Cycle(double y, vector<double> x, double eps, string filename_error, string filename_iter, int wtf);
-void TestRunge_Kutta_method(double h, string filename_runge, string filename_stepLength, string filename_x);
-int main(void)
-{
-	vector<double> x = createSteadyGrid(A, B, N);
-	vector<double> answ;
-	for (int i = 0; i < N; i++)
-	{
-		answ.push_back(Answer(x[i]));
+double* createSteadyGrid(double a, double b, int n);
+void cycle(double y, double* x, double eps, FILE* f_error, FILE* f_iter, int wtf);
+void RungePoints(double h, FILE* f_euler, FILE* f_stepLength, FILE* f_x, FILE* f_error);
+void RungePoints2(double h, FILE* f_euler, FILE* f_stepLength, FILE* f_x, FILE* f_error);
+int main(int argc, char* argv[]) {
+	FILE* f_y = fopen("f_y.txt", "w");
+	FILE* f_x = fopen("f_x.txt", "w");
+	FILE* f_euler = fopen("f_euler.txt", "w");
+	FILE* f_error = fopen("f_error.txt", "w");
+	FILE* f_eps = fopen("f_eps.txt", "w");
+	FILE* f_iter = fopen("f_iter.txt", "w");
+	FILE* f_wtfError = fopen("f_wtfError.txt", "w");
+	FILE* f_wtfDer = fopen("f_wtfDer.txt", "w");
+	FILE* f_maxError = fopen("f_maxError.txt", "w");
+	FILE* f_stepLength = fopen("f_stepLength.txt", "w");
+	if (!f_y || !f_x || !f_euler || !f_error || !f_eps || !f_iter || !f_wtfDer || !f_maxError) {
+		printf("Error opening file\n");
+		return 1;
 	}
-	string filename_x = "files/f_x.txt";
-	string filename_y = "files/f_y.txt";
-	PrintVectorToFile(filename_x, x);
-	PrintVectorToFile(filename_y, answ);
-	string filename_eps = "files/f_eps.txt";
-	vector<double> epsilon;
-	string filename_iter = "files/f_iter.txt";
-	string filename_error = "files/f_error.txt";
-	for (double eps = 0.001; eps > 0.00000001; eps /= 10) {
-		epsilon.push_back(eps);
-		printf("\neps=%e\n", eps);
+
+	double* x = createSteadyGrid(A, B, N);
+	for (int i = 0; i < N; i++) {
+		fprintf(f_x, "%.15lf ", x[i]);
+		fprintf(f_y, "%.15lf ", fDiff(x[i]));
+	}
+
+	RungePoints((B - A) / 23, f_euler, f_stepLength, f_x, f_error);
+	RungePoints2((B - A) / 46, f_euler, f_stepLength, f_x, f_error);
+	/*double eps = 0.000000001;
+	double y = F(A);
+	for (double c = 0.1; c >= 0.00000000000001; c /= 10) {
+		printf("Hui");
+		fprintf(f_wtfDer, "%.15lf ", c);
+		cycle(y - c, x, eps, f_wtfError, f_iter, 1);
+	}*/
+
+	for (double eps = 0.001; eps > 0.000000000000001; eps /= 10) {
+		fprintf(f_eps, "%.15lf ", eps);
+		printf("\n\neps=%e\n", eps);
 		double y = F(A);
-		//Cycle(y, x, eps, filename_error, filename_iter, 0);
+		cycle(y, x, eps, f_maxError, f_iter, 0);
+		if (eps == 0.00001) {
+			for (double c = 0.1; c >= 0.00000000000001; c /= 10) {
+				fprintf(f_wtfDer, "%.15lf ", c);
+				cycle(y - c, x, eps, f_wtfError, f_iter, 1);
+			}
+		}
 	}
-	PrintVectorToFile(filename_eps,epsilon);
+
+	fclose(f_eps);
+	fclose(f_error);
+	fclose(f_x);
+	fclose(f_y);
+	fclose(f_euler);
+	fclose(f_iter);
+	fclose(f_wtfError);
+	fclose(f_wtfDer);
+	fclose(f_stepLength);
+	fclose(f_maxError);
+	free(x);
 	return 0;
 }
 
-void Cycle(double y, vector<double> x, double eps, string filename_error, string filename_iter, int wtf) {
-	vector<double> iter;
-	vector<double> error;
+void cycle(double y, double* x, double eps, FILE* f_error, FILE* f_iter, int wtf) {
 	for (int i = 0; i < N - 1; i++) {
-		double h = (B - A) / (N - 1);
+		double h = (B - A) / (N - 1.0);
 		int m = 1;
 		double prev;
 		double next = Runge_Kutta_method(m, h, x[i], y);
@@ -59,89 +88,58 @@ void Cycle(double y, vector<double> x, double eps, string filename_error, string
 			m *= 2;
 			prev = next;
 			next = Runge_Kutta_method(m, h, x[i], y);
-		} while (fabs((next - prev)) / (2 ^ P - 1) >= eps);
+
+		} while (fabs((next - prev)) / (pow(2, 3) - 1) >= eps);
 
 		y = next;
 		if (i == 0 && wtf == 0) {
-			iter.push_back((int)log2(m));
-			
+			fprintf(f_iter, "%d ", (int)log2(m));
 		}
 		if (wtf == 0) {
-			printf("\nx=%.15lf\ny=%.15lf\nnext=%.15lf\n", x[i + 1], Answer(x[i + 1]), next);
+			printf("\nx=%.15lf\ny=%.15lf\nnext=%.15lf\n", x[i + 1], fDiff(x[i + 1]), next);
 		}
-		printf("error=%.15lf\n", fabs(next - Answer(x[i + 1])));
-		error.push_back(fabs(next - Answer(x[i + 1])));
-	}
-	PrintVectorToFile(filename_iter, iter);
-	PrintVectorToFile(filename_error, error);
-}
-
-
-void PrintVector(vector<double> vec)
-{
-	for (auto& v : vec)
-	{
-		cout << setprecision(17) << v;
-		cout << ' ';
+		printf("error=%.15lf\n", fabs(next - fDiff(x[i + 1])));
+		fprintf(f_error, "%.15lf ", fabs(next - fDiff(x[i + 1])));
 	}
 }
 
-double Runge_Kutta_method(int m, double h, double x, double y)
-{
-	double y_prev = y;
-	double k1, k2, k3;
-	//double x = A;
-	//double y = F(A)
-	for (int i = 0; i < m; i++)
-	{
-		//x = a + i * h;
-		k1 = f(x, y);
-		k2 = f(x + h / 3, y + h * k1 / 3);
-		k3 = f(x + 2 * h / 3, y + 2 * h * k2 / 3);
-		y_prev = y;
-		y = y_prev + (h / 4)*(k1+3*k3);
-		x = x + h;
-	}
-	return y;
-}
-
-void PrintVectorToFile(string filename, vector<double> vec)
-{
-	ofstream file;
-	file.open(filename);
-	if (!file.is_open())
-	{
-		cout << "Uh oh.File wasn't opened. Check if the name of file " << filename << " correct.\n" << endl;
+double* createSteadyGrid(double a, double b, int n) {
+	double* x = (double*)malloc(sizeof(double) * n);
+	if (!x) {
+		printf("Error allocating memory to x\n");
 		exit(1);
 	}
-	for (auto& v : vec)
-	{
-		file << setprecision(17) << v;
-		file << ' ';
-	}
-	file.close();
-}
-
-double Answer(double x)
-{
-	return x * sin(x);
-}
-
-double f(double x, double y)
-{
-	return y / x + x * cos(x);
-}
-
-vector<double> createSteadyGrid(double a, double b, int n) {
-	vector<double> x;
 
 	for (int i = 0; i < n; i++) {
-		x.push_back(a + (b - a) * i / (n-1));
+		x[i] = a + (b - a) * i / (n - 1.0);
 	}
+
 	return x;
 }
 
-double Euler(int m, double h, double x, double y) {
+
+double fDiff(double x) {
+	return  x * sin(x);
+}
+
+/*double f(double x, double y) {
+	//return (4 * x + 2 * y) / (2 * x + 1);
+	return 2 * y / (x * log(x)) + 1 / x;
+}*/
+
+double f(double x, double y) {
+
+	return y / x + x * cos(x);
+}
+
+/*double f(double x, double y) {
+	//return (4 * x + 2 * y) / (2 * x + 1);
+	double res;
+	res = (2 * (log(x) - 1) + 1) / x;
+	return res;
+}*/
+
+/*double euler(int m, double h, double x, double y) {
 	double halfY = y;
 	for (int i = 0; i < m; i++) {
 		halfY = y + h / 2 * f(x, y);
@@ -150,22 +148,60 @@ double Euler(int m, double h, double x, double y) {
 	}
 
 	return y;
+}*/
+
+double Runge_Kutta_method(int m, double h, double x, double y) {
+	double k1, k2, k3 = y;
+	double x2, x3, y2, y3;
+	for (int i = 0; i < m; i++) {
+		k1 = f(x, y);
+		x2 = x + h / 2;
+		y2 = y + h * k1 / 2;
+		k2 = f(x2, y2);
+		y3 = y - h * k1 + 2 * h * k2;
+		x3 = x + h;
+		k3 = f(x3, y3);
+		y = y + h * (k1 + 4 * k2 + k3) / 6;
+		x += h;
+	}
+
+	return y;
 }
 
-void TestRunge_Kutta_method(double h, string filename_runge, string filename_stepLength, string filename_x)
-{
+void RungePoints(double h, FILE* f_euler, FILE* f_stepLength, FILE* f_x, FILE* f_error) {
 	double y = F(A);
 	int i = 0;
-	vector<double> runge;
-	vector<double> stepLength;
-	vector<double>x_h;
-	for (double x = A; x <= B; x += h, i++) {
+
+	//y = Runge_Kutta_method(1, h, A, y);
+	fprintf(f_x, "%.15lf ", A);
+	fprintf(f_euler, "%.15lf ", y);
+	fprintf(f_error, "%.15lf ", fabs(0));
+	for (double x = A; x < B; x += h, i++) {
 		y = Runge_Kutta_method(1, h, x, y);
-		x_h.push_back(x + h);
-		runge.push_back(y);
+		fprintf(f_x, "%.15lf ", x+h);
+		fprintf(f_euler, "%.15lf ", y);
+		fprintf(f_error, "%.15lf ", fabs(y - fDiff(x+h)));
 	}
-	PrintVectorToFile(filename_x, x_h);
-	PrintVectorToFile(filename_runge, runge);
-	stepLength.push_back(i);
-	PrintVectorToFile(filename_stepLength, stepLength);
+
+	fprintf(f_stepLength, "%d ", i);
 }
+
+void RungePoints2(double h, FILE* f_euler, FILE* f_stepLength, FILE* f_x, FILE* f_error) {
+	double y = F(A);
+	int i = 0;
+
+	//y = Runge_Kutta_method(1, h, A, y);
+	fprintf(f_x, "%.15lf ", A);
+	fprintf(f_euler, "%.15lf ", y);
+	fprintf(f_error, "%.15lf ", fabs(0));
+	for (double x = A; x < B-h; x += h, i++) {
+		y = Runge_Kutta_method(1, h, x, y);
+		fprintf(f_x, "%.15lf ", x + h);
+		fprintf(f_euler, "%.15lf ", y);
+		fprintf(f_error, "%.15lf ", fabs(y - fDiff(x + h)));
+	}
+
+	fprintf(f_stepLength, "%d ", i);
+}
+
+
