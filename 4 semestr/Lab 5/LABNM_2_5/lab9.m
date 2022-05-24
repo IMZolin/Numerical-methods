@@ -3,12 +3,14 @@ eps = load('f_eps.txt');
 x = load('f_x.txt');
 y = load('f_y.txt');
 euler = load('f_euler.txt');
+runge = load('f_runge.txt');
 stepLength = load('f_stepLength.txt');
 iter = load('f_iter.txt');
 wtfError = load('f_wtfError.txt');
 wtfDer = load('f_wtfDer.txt');
 eulerError = load('f_error.txt');
-
+actual_error = load('f_actual_error.txt');
+steps = load('f_steps.txt');
 figure;
 plot(x(1:30), y, 'r');
 hold on;
@@ -70,3 +72,9 @@ loglog(wtfDer,maxWtfError);
 xlabel('Возмущение');
 ylabel('Max error', 'Rotation', 0);
 title('Graph of the dependence of the error rate on the magnitude of the disturbance at a fixed accuracy');
+
+figure;
+loglog(steps, actual_error,'b-*');
+xlabel('Step, h');
+ylabel('Actual error');
+title('Dependence of the actual accuracy on the step value');

@@ -1,0 +1,53 @@
+x = load('f_x.txt');
+x1 = load('f_x1.txt');
+x2 = load('f_x2.txt');
+y = load('f_y.txt');
+runge1 = load('f_runge1.txt');
+runge2 = load('f_runge2.txt');
+n = load('f_stepLength.txt');
+error1 = load('f_error1.txt');
+error2 = load('f_error2.txt');
+iter = load('f_iter.txt');
+eps = load('f_eps.txt');
+max_error = load('f_maxError.txt');
+actual_error = load('f_actual_error.txt');
+steps = load('f_steps.txt');
+outrage = load('f_outrage.txt');
+outrage_error = load('f_outrage_error.txt');
+
+figure;
+plot(x, y, 'r');
+hold on;
+plot(x1(1:n(1)),runge1(1:n(1)),'b-o');
+plot(x2(1:n(2)),runge2(1:n(2)),'g-*');
+xlabel('x');
+ylabel('y', 'Rotation', 0);
+title('Graphs of exact and obtained solutions on a segment with two different steps');
+legend('Function', 'Runge-Kutta1', 'Runge-Kutta2');
+figure;
+plot(x1, error1);
+hold on;
+plot(x2, error2);
+legend('Step 1: 3\pi /46', 'Step 2: 3\pi/92');
+title('Error graph on a given segment');
+
+figure;
+subplot(1,2,1);
+loglog(eps, max_error);
+hold on;
+loglog(eps, eps, 'r');
+loglog(eps, eps*30, 'b');
+title('Dependence of the actual accuracy on the specified accuracy');
+subplot(1,2,2);
+semilogx(eps,iter);
+title('Dependence of the number of iterations on the specified accuracy');
+
+figure;
+loglog(outrage,outrage_error);
+title('Dependence of the error rate on the magnitude of the disturbance at a fixed accuracy');
+
+figure;
+loglog(steps, actual_error,'b-*');
+xlabel('Step, h');
+ylabel('Actual error');
+title('Dependence of the actual accuracy on the step value');

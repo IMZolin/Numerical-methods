@@ -1,2 +1,1 @@
 D:\University\Numerical methods\Labs\4 semestr\Lab 7\LABNM_2_7\Debug\LABNM_2_7.exe
-D:\University\Numerical methods\Labs\4 semestr\Lab 7\LABNM_2_7\Debug\LABNM_2_7.pdb
