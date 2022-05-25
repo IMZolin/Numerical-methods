@@ -49,12 +49,14 @@ int main(void)
 		double h = (FINISH - START) / N;
 		x1[i] = START + i * h;
 		y1[i] = y_exact(x1[i]);
+		fprintf(f_x1, "%lf ", x1[i]);
 	}
 	for (int i = 0; i < 2 * N + 1; i++)
 	{
 		double h = (FINISH - START) / (2 * N + 1);
 		x2[i] = START + i * h;
 		y2[i] = y_exact(x2[i]);
+		fprintf(f_x2, "%lf ", x2[i]);
 	}
 	for (int i = 0; i < 10 * N + 1; i++)
 	{
@@ -126,18 +128,21 @@ void AccuracyRunge(double* y1, double* y2, FILE* f_runge1, FILE* f_runge2, FILE*
 	double* error2 = (double*)malloc((2*N + 1) * sizeof(double));
 	double* runge1 = (double*)malloc((N + 1) * sizeof(double));
 	double* runge2 = (double*)malloc((2 * N + 1) * sizeof(double));
-	Runge_Kutta(START, FINISH, N, Y_O, Y_DEF_O, runge1);
-	Runge_Kutta(START, FINISH, 2*N, Y_O, Y_DEF_O, runge2);
-	for (int i = 0; i < N + 1; i++)
+	Runge_Kutta(START, FINISH, N + 1, Y_O, Y_DEF_O, runge1);
+	Runge_Kutta(START, FINISH, 2*N + 1, Y_O, Y_DEF_O, runge2);
+	printf("RUNGE\n");
+	error1[0] = 0.0;
+	error2[0] = 0.0;
+	for (int i = 1; i < N + 1; i++)
 	{
-		printf("%le ", error1[i]);
+		printf("%le\n", error1[i]);
 		error1[i] = fabs(runge1[i] - y1[i]);
 		fprintf(f_runge1, "%lf ", runge1[i]);
 		fprintf(f_error_runge1, "%le ", error1[i]);
 	}
-	for (int i = 0; i < 2*N + 1; i++)
+	for (int i = 1; i < 2*N + 1; i++)
 	{
-		printf("%le ", error2[i]);
+		printf("%le\n", error2[i]);
 		error2[i] = fabs(runge2[i] - y2[i]);
 		fprintf(f_runge1, "%lf ", runge2[i]);
 		fprintf(f_error_runge1, "%le ", error2[i]);
@@ -222,29 +227,32 @@ void MKR(double a, double b, int n1, double* p, double* q, double* f, double alf
 
 void AccuracyMKR(double* y1, double* y2, FILE* f_mkr1, FILE* f_mkr2, FILE* f_error_mkr1, FILE* f_error_mkr2)
 {
-	double* error1 = (double*)malloc((N) * sizeof(double));
-	double* error2 = (double*)malloc((2 * N - 1) * sizeof(double));
+	double* error1 = (double*)malloc((N + 1) * sizeof(double));
+	double* error2 = (double*)malloc((2 * N + 1) * sizeof(double));
 	double* mkr1 = (double*)malloc((N + 1) * sizeof(double));
 	double* mkr2 = (double*)malloc((2 * N + 1) * sizeof(double));
+	mkr1[0] = y1[0];
+	mkr2[0] = y2[0];
 	double* p1 = malloc((N - 2) * sizeof(double));
 	double* q1 = malloc((N - 2) * sizeof(double));
 	double* f1 = malloc((N) * sizeof(double));
 	double* p2 = malloc((2*N - 2) * sizeof(double));
 	double* q2 = malloc((2*N - 2) * sizeof(double));
 	double* f2 = malloc((2*N) * sizeof(double));
-	MKR(START, FINISH, N, p1, q1, f1, A, B, mkr1);
+	MKR(START, FINISH, N + 1, p1, q1, f1, A, B, mkr1);
 	MKR(START, FINISH, 2 * N - 1, p2, q2, f2, A, B, mkr2);
-	for (int i = 0; i < N; i++)
+	printf("MKR");
+	for (int i = 1; i < N; i++)
 	{
 		error1[i] = fabs(mkr1[i] - y1[i]);
-		printf("%le ", error1[i]);
+		printf("%le\n", error1[i]);
 		fprintf(f_mkr1, "%lf ", mkr1[i]);
 		fprintf(f_error_mkr1, "%le ", error1[i]);
 	}
-	for (int i = 0; i < 2 * N - 1; i++)
+	for (int i = 1; i < 2 * N - 1; i++)
 	{
 		error2[i] = fabs(mkr2[i] - y2[i]);
-		printf("%le ", error2[i]);
+		printf("%le\n", error2[i]);
 		fprintf(f_mkr2, "%lf ", mkr2[i]);
 		fprintf(f_error_mkr2, "%le ", error2[i]);
 	}
