@@ -57,36 +57,36 @@ int main(int argc, char* argv[]) {
 	//3-rd part
 	Outrage(f_eps2, f_outrage, f_outrage_error, f_iter2);
 
-	//last part
-	double* actual_error = (double*)malloc(8 * sizeof(double));
-	double length = B - A;
-	//double h[] = { length / 10, length / 50, length / 100, length / 500, length/1000, length / 5000, length/10000, length / 50000 };
-	double h[] = { length / 10, length / 50, length / 100, length / 500, length / 1000, length / 5000, length / 10000, length / 50000 };
-	double runge = F(A);
-	printf("\n");
-	for (int i=0; i<8; i++)
-	{
-		fprintf(f_steps, "%.15lf ", h[i]);
-		actual_error[i] = 0.0;
-		runge = F(A);
-		for (double x = A; x < B; x += h[i])
-		{
-			runge = Runge_Kutta_method(1, h[i], x, runge);
-			if(actual_error[i] < fabs(fDiff(x + h[i]) - runge))
-				actual_error[i] = fabs(fDiff(x + h[i]) - runge);
-			
-			if (i == 0)
-			{
-				//printf("Runge %le\n", runge);
-				//printf("Func %le\n", fDiff(x + h[i]));
-				//printf("Error %le\n", actual_error[i]);
-			}
-		}
-		//printf("FINISH\n");
-		//printf("h %le\n", h[i]);
-		//printf("Error %le\n", actual_error[i]);
-		fprintf(f_actual_error, "%.15lf ", actual_error[i]);
-	}
+	////last part
+	//double* actual_error = (double*)malloc(8 * sizeof(double));
+	//double length = B - A;
+	////double h[] = { length / 10, length / 50, length / 100, length / 500, length/1000, length / 5000, length/10000, length / 50000 };
+	//double h[] = { length / 10, length / 50, length / 100, length / 500, length / 1000, length / 5000, length / 10000, length / 50000 };
+	//double runge = F(A);
+	//printf("\n");
+	//for (int i=0; i<8; i++)
+	//{
+	//	fprintf(f_steps, "%.15lf ", h[i]);
+	//	actual_error[i] = 0.0;
+	//	runge = F(A);
+	//	for (double x = A; x < B; x += h[i])
+	//	{
+	//		runge = Runge_Kutta_method(1, h[i], x, runge);
+	//		if(actual_error[i] < fabs(fDiff(x + h[i]) - runge))
+	//			actual_error[i] = fabs(fDiff(x + h[i]) - runge);
+	//		
+	//		if (i == 0)
+	//		{
+	//			//printf("Runge %le\n", runge);
+	//			//printf("Func %le\n", fDiff(x + h[i]));
+	//			//printf("Error %le\n", actual_error[i]);
+	//		}
+	//	}
+	//	//printf("FINISH\n");
+	//	//printf("h %le\n", h[i]);
+	//	//printf("Error %le\n", actual_error[i]);
+	//	fprintf(f_actual_error, "%.15lf ", actual_error[i]);
+	//}
 
 	fclose(f_eps);
 	fclose(f_error);
@@ -120,16 +120,10 @@ void Accuracy(FILE* f_eps, FILE* f_maxError, FILE* f_iter)
 void Outrage(FILE* f_eps2, FILE* f_outrage, FILE* f_outrage_error, FILE* f_iter2)
 {
 	double* x = createSteadyGrid(A, B, N);
-	for (double eps = 0.001; eps > 0.00000000000001; eps /= 10) {
-		fprintf(f_eps2, "%.15lf ", eps);
-		printf("\n\neps=%e\n", eps);
-		double y = F(A);
-		if (eps == 0.00001) {
-			for (double c = 0.1; c >= 0.00000000000001; c /= 10) {
-				fprintf(f_outrage, "%.15lf ", c);
-				cycle(y - c, x, eps, f_outrage_error, f_iter2, 1);
-			}
-		}
+	double y = F(A);
+	for (double c = 0.1; c >= 0.00000000000001; c /= 10) {
+		fprintf(f_outrage, "%le ", c);
+		cycle(y - c, x, pow(10, -8), f_outrage_error, f_iter2, 1);
 	}
 }
 
@@ -139,7 +133,7 @@ void cycle(double y, double* x, double eps, FILE* f_error, FILE* f_iter, int wtf
 		double h = (B - A) / (N - 1.0);
 		int m = 1;
 		double prev;
-		
+
 		double next = Runge_Kutta_method(m, h, x[i], y);
 		do {
 			h /= 2;
@@ -156,6 +150,8 @@ void cycle(double y, double* x, double eps, FILE* f_error, FILE* f_iter, int wtf
 		}
 		if (wtf == 0) {
 			printf("\nx=%.15lf\ny=%.15lf\nnext=%.15lf\n", x[i + 1], fDiff(x[i + 1]), next);
+			if (F(A) - 0.00000000000001)
+				printf("Number %le\n", (B - A) / h);
 		}
 		printf("error=%le\n", fabs(next - fDiff(x[i + 1])));
 		if (error < fabs(next - fDiff(x[i + 1])))
@@ -195,8 +191,8 @@ double Runge_Kutta_method(int m, double h, double x, double y) {
 		x2 = x + h / 3;
 		y2 = y + h * k1 / 3;
 		k2 = f(x2, y2);
-		y3 = y + 2 * h * k2/3;
-		x3 = x + 2 * h/ 3;
+		y3 = y + 2 * h * k2 / 3;
+		x3 = x + 2 * h / 3;
 		k3 = f(x3, y3);
 		y = y + h * (k1 + 3 * k3) / 4;
 		x += h;
@@ -213,9 +209,9 @@ void RungePoints(double h, FILE* f_runge, FILE* f_stepLength, FILE* f_x, FILE* f
 	fprintf(f_error, "%.15lf ", fabs(0));
 	for (double x = A; x < B; x += h, i++) {
 		y = Runge_Kutta_method(1, h, x, y);
-		fprintf(f_x, "%.15lf ", x+h);
+		fprintf(f_x, "%.15lf ", x + h);
 		fprintf(f_runge, "%.15lf ", y);
-		fprintf(f_error, "%.15lf ", fabs(y - fDiff(x+h)));
+		fprintf(f_error, "%.15lf ", fabs(y - fDiff(x + h)));
 	}
 
 	fprintf(f_stepLength, "%d ", i);

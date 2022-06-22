@@ -10,8 +10,6 @@ error2 = load('f_error2.txt');
 iter = load('f_iter.txt');
 eps = load('f_eps.txt');
 max_error = load('f_maxError.txt');
-actual_error = load('f_actual_error.txt');
-steps = load('f_steps.txt');
 outrage = load('f_outrage.txt');
 outrage_error = load('f_outrage_error.txt');
 
@@ -46,8 +44,4 @@ figure;
 loglog(outrage,outrage_error);
 title('Dependence of the error rate on the magnitude of the disturbance at a fixed accuracy');
 
-figure;
-loglog(steps, actual_error,'b-*');
-xlabel('Step, h');
-ylabel('Actual error');
-title('Dependence of the actual accuracy on the step value');
+

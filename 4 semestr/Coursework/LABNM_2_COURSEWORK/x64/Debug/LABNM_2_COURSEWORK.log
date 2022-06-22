@@ -1,2 +1,15 @@
 ﻿  lab_coursework.c
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(279,34): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(280,35): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(281,32): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(282,36): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(284,29): warning C4244: функция: преобразование "double" в "int", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(434,34): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(435,35): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(436,32): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(437,42): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(438,42): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(439,38): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(440,36): warning C4244: функция: преобразование "double" в "size_t", возможна потеря данных
+D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\lab_coursework.c(442,21): warning C4244: функция: преобразование "double" в "int", возможна потеря данных
   LABNM_2_COURSEWORK.vcxproj -> D:\University\Numerical methods\Labs\4 semestr\Coursework\LABNM_2_COURSEWORK\x64\Debug\LABNM_2_COURSEWORK.exe
