@@ -1,15 +1,15 @@
-y1 = load('f_y1.txt.');
-sol1 = load('f_sol1.txt');
-x1 = load('f_x1.txt');
-y2 = load('f_y1.txt.');
-sol2 = load('f_sol2.txt');
-x2 = load('f_x2.txt');
-error1 = load('f_error1.txt');
-error2 = load('f_error2.txt');
-perturb_error = load('f_perturb_error.txt');
-perturbation = load('f_perturbation.txt');
-actual_error = load('f_actual_error.txt');
-steps = load('f_steps.txt');
+y1 = load('files\f_y1.txt.');
+sol1 = load('files\f_sol1.txt');
+x1 = load('files\f_x1.txt');
+y2 = load('files\f_y1.txt.');
+sol2 = load('files\f_sol2.txt');
+x2 = load('files\f_x2.txt');
+error1 = load('files\f_error1.txt');
+error2 = load('files\f_error2.txt');
+perturb_error = load('files\f_perturb_error.txt');
+perturbation = load('files\f_perturbation.txt');
+actual_error = load('files\f_actual_error.txt');
+steps = load('files\f_steps.txt');
 
 figure;
 subplot(1,2,1);
