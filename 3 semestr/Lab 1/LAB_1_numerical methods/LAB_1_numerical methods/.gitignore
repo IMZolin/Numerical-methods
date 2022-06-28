@@ -7,3 +7,6 @@
 *.user
 *.suo
 *.db 
+*.aux
+*.syntecx
+*.log
