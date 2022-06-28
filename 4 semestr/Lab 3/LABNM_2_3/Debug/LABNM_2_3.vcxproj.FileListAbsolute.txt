@@ -1,4 +1,0 @@
-D:\University\Numerical methods\Labs\4 semestr\Лаба 3\LABNM_2_3\Debug\LABNM_2_3.exe
-D:\University\Numerical methods\Labs\4 semestr\Лаба 3\LABNM_2_3\Debug\LABNM_2_3.pdb
-D:\University\Numerical methods\Labs\4 semestr\Lab 3\LABNM_2_3\Debug\LABNM_2_3.exe
-D:\University\Numerical methods\Labs\4 semestr\Lab 3\LABNM_2_3\Debug\LABNM_2_3.pdb
