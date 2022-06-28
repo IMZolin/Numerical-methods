@@ -8,3 +8,4 @@
 *.suo
 *.db 
 /.idea
+/x64
