@@ -1,0 +1,11 @@
+/Debug
+/Release
+/.vs
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.suo
+*.db 
+~$b2(.c)_ver1.docx
+~$talab_lab2_ver1.docx
